@@ -1,5 +1,3 @@
-npm run format:prettier
-
-npm run format:eslint
+npm run format:
 
 git add .
