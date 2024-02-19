@@ -12,7 +12,7 @@ module.exports = {
   // 分号
   semi: false,
   // 使用单引号
-  singleQuote: true,
+  singleQuote: false,
   // 缩进
   tabWidth: 2,
   // 使用 tab 缩进
