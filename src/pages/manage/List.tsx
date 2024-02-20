@@ -5,7 +5,7 @@ import styles from "./common.module.scss"
 import { useTitle } from "ahooks"
 import { Typography } from "antd"
 
-const {Title} = Typography
+const { Title } = Typography
 
 const rawQuestionList = [
   {
