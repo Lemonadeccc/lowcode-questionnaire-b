@@ -1,12 +1,12 @@
 import React, { FC, useState } from "react"
 import styles from "./common.module.scss"
 import { useTitle } from "ahooks"
-import { Empty, Typography, Table, Tag, Button, Space ,Modal} from "antd"
+import { Empty, Typography, Table, Tag, Button, Space, Modal } from "antd"
 import { stringify } from "querystring"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
 
 const { Title } = Typography
-const {confirm} = Modal
+const { confirm } = Modal
 const rawQuestionList = [
   {
     _id: "q1",
@@ -61,21 +61,25 @@ const Trash: FC = () => {
     },
   ]
 
-  function del(){
+  function del() {
     confirm({
-      title:'确认彻底删除该问卷？',
-      icon: <ExclamationCircleOutlined/>,
-      content:'删除以后不可以找回',
-      onOk: () => alert(`删除 ${JSON.stringify(selectedIds)}`)
+      title: "确认彻底删除该问卷？",
+      icon: <ExclamationCircleOutlined />,
+      content: "删除以后不可以找回",
+      onOk: () => alert(`删除 ${JSON.stringify(selectedIds)}`),
     })
   }
 
   const TableElem = (
     <>
-      <div style={{marginBottom:'16px'}}>
+      <div style={{ marginBottom: "16px" }}>
         <Space>
-          <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
-          <Button danger  disabled={selectedIds.length === 0} onClick={del}>彻底删除</Button>
+          <Button type="primary" disabled={selectedIds.length === 0}>
+            恢复
+          </Button>
+          <Button danger disabled={selectedIds.length === 0} onClick={del}>
+            彻底删除
+          </Button>
         </Space>
       </div>
       <Table
