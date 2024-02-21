@@ -2,10 +2,11 @@ import React, { FC } from "react"
 // import { useSearchParams } from "react-router-dom"
 import QuestionCard from "../../components/QuestionCard"
 import styles from "./common.module.scss"
-import { useTitle, useRequest } from "ahooks"
+import { useTitle } from "ahooks"
 import { Typography, Spin } from "antd"
 import ListSearch from "../../components/ListSearch"
-import { getQuestionListService } from "../../services/question"
+// import { getQuestionListService } from "../../services/question"
+import useLoadQuestionListData from "../../hooks/useLoadQuestionListData"
 
 const { Title } = Typography
 
@@ -15,7 +16,8 @@ const List: FC = () => {
 
   useTitle("问问卷 - 我的问卷")
 
-  const { data = {}, loading } = useRequest(getQuestionListService)
+  // const { data = {}, loading } = useRequest(getQuestionListService)
+  const { data = {}, loading } = useLoadQuestionListData()
   const { list = [], total = 0 } = data
 
   // const [list, setList] = useState([])
