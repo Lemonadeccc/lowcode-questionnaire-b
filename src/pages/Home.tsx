@@ -1,12 +1,27 @@
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Typography } from "antd"
 import { MANAGE_INDEX_PATHNAME } from "../router"
 import styles from "./Home.module.scss"
+// import '../_mock/index'
+// import axios from "axios"
+
 const { Title, Paragraph } = Typography
 
 const Home: FC = () => {
   const nav = useNavigate()
+
+  // useEffect(() => {
+  //   //mock只能劫持xhr不能劫持fetch
+  //   // fetch('/api/test').then(res => res.json()).then(data => console.log(data))
+  //   axios.get('/api/test').then(res => console.log('axios resData',res.data))
+  // } ,[])
+
+  useEffect(() => {
+    //server http://localhost:3001/api/test  跨域使用webpack的devserver
+    // fetch('/api/test').then(res => res.json()).then(data => console.log('fetch data',data))
+    // axios.get('/api/test').then(res => console.log('axios resData',res.data))
+  }, [])
 
   // function clickHandler() {
   //   // nav('/login?b=20')
