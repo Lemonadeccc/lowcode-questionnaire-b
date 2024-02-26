@@ -1,36 +1,22 @@
-//useLoadQuestionData
-// import { useEffect,useState } from "react";
-import { useParams } from "react-router-dom"
-import { getQuestionService } from "../services/question"
+import { useSearchParams } from "react-router-dom"
+import { getQuestionListService } from "../services/question"
 import { useRequest } from "ahooks"
+import { LIST_SEARCH_PARAM_KEY } from "../constant/index"
 
-function useLoadQuestionData() {
-  const { id = "" } = useParams()
+function useLoadQuestionListData() {
+  const [searchParams] = useSearchParams()
 
-  // const [loading,setLoading] = useState(true)
-  // const [questionData,setQuestionData] = useState({})
-
-  // useEffect(() => {
-  //   async function fn(){
-  //     const data = await getQuestionService(id)
-  //     // console.log('edit page data',data)
-  //     setQuestionData(data)
-  //     setLoading(false)
-  //   }
-  //   fn()
-  // }
-  // ,[])
-
-  // return {loading,questionData}
-
-  async function load() {
-    const data = await getQuestionService(id)
-    return data
-  }
-
-  const { data, error, loading } = useRequest(load)
-
-  return { loading, data, error }
+  const { data, loading, error } = useRequest(
+    async () => {
+      const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || ""
+      const data = await getQuestionListService({ keyword })
+      return data
+    },
+    {
+      refreshDeps: [searchParams], //依赖刷新项
+    }
+  )
+  return { data, loading, error }
 }
 
-export default useLoadQuestionData
+export default useLoadQuestionListData
