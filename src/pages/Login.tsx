@@ -1,9 +1,13 @@
 import React, { FC, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styles from "./Login.module.scss"
-import { Typography, Space, Form, Input, Button, Checkbox } from "antd"
+import { Typography, Space, Form, Input, Button, Checkbox, message } from "antd"
 import { UserAddOutlined } from "@ant-design/icons"
-import { REGISTER_PATHNAME } from "../router"
+import { MANAGE_INDEX_PATHNAME, REGISTER_PATHNAME } from "../router"
+import { useRequest } from "ahooks"
+import { loginService } from "../services/user"
+import { setToken } from "../utils/user-token"
+
 const { Title } = Typography
 
 const USERNAME_KEY = "USERNAME"
@@ -27,10 +31,30 @@ function getUserInfoFromStorage() {
 const Login: FC = () => {
   const nav = useNavigate()
 
+  const { run } = useRequest(
+    async (username: string, password: string) => {
+      const data = await loginService(username, password)
+      return data
+    },
+    {
+      manual: true,
+      onSuccess(result) {
+        const { token = "" } = result
+        setToken(token) //存储token
+        //存储token
+        message.success("成功")
+        nav(MANAGE_INDEX_PATHNAME) //导航到我的问卷中去
+      },
+    }
+  )
+
   const onFinish = (values: any) => {
     console.log(values)
     const { username, password, remember } = values || {}
-    if (values.remember) {
+
+    run(username, password) //执行ajax
+
+    if (remember) {
       rememberUser(username, password)
     } else {
       deleteUserFromStorage()
