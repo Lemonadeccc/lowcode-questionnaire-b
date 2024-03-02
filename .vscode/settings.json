@@ -6,7 +6,11 @@
   "cSpell.words": [
     "ahooks",
     "antd",
+    "clonedeep",
+    "downarrow",
+    "immer",
     "Popconfirm",
-    "reduxjs"
+    "reduxjs",
+    "uparrow"
   ]
 }
