@@ -1,5 +1,9 @@
 # Install
- `npm install`
+ ```
+ npm install
+ ```
 # Getting Started
- `npm start`
+ ```
+ npm start
+ ```
 
