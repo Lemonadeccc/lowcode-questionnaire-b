@@ -1,15 +1,32 @@
 import React, { FC } from "react"
-import { Typography, Space, Form, Input, Button } from "antd"
+import { Typography, Space, Form, Input, Button, message } from "antd"
 import { UserAddOutlined } from "@ant-design/icons"
 import styles from "./Register.module.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { LOGIN_PATHNAME } from "../router"
+import { registerService } from "../services/user"
+import { useRequest } from "ahooks"
 
 const { Title } = Typography
 
 const Register: FC = () => {
+  const nav = useNavigate()
+  const { run } = useRequest(
+    async values => {
+      const { username, password, nickname } = values
+      await registerService(username, password, nickname)
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success("注册成功")
+        nav(LOGIN_PATHNAME)
+      },
+    }
+  )
+
   const onFinish = (values: any) => {
-    console.log(values)
+    run(values)
   }
 
   return (
@@ -30,7 +47,7 @@ const Register: FC = () => {
             rules={[
               { required: true, message: "请输入用户名" },
               { type: "string", min: 5, max: 20, message: "字符长度在 5-20 之间" },
-              { pattern: /^w+$/, message: "只能字母数字下划线" },
+              { pattern: /^\w+$/, message: "只能字母数字下划线" },
             ]}
           >
             <Input></Input>
