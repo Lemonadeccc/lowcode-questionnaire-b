@@ -13,5 +13,5 @@
     "reduxjs",
     "uparrow"
   ],
-  "audioCues.volume": 0
+  "accessibility.signals.sounds.volume": 0
 }
