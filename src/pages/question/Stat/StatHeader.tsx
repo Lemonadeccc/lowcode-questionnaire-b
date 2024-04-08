@@ -1,7 +1,8 @@
 import React, { FC, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { Space, Button, Typography, Input, Tooltip, InputRef, message } from "antd"
-import { LeftOutlined, CopyOutlined } from "@ant-design/icons"
+import { Space, Button, Typography, Input, Tooltip, InputRef, message, Popover } from "antd"
+import { LeftOutlined, CopyOutlined, QrcodeOutlined } from "@ant-design/icons"
+import QRCode from "qrcode.react"
 import useGetPageInfo from "../../../hooks/useGetPageInfo"
 import styles from "./StatHeader.module.scss"
 
@@ -27,7 +28,15 @@ const StatHeader: FC = () => {
     if (!isPublished) {
       return null
     }
+    //拼接url，需要参考C端规则
     const url = `http://localhost:3000/question/${id}`
+
+    //定义二维码组件
+    const QRCodeElem = (
+      <div style={{ textAlign: "center" }}>
+        <QRCode value={url} size={150} />
+      </div>
+    )
 
     return (
       <Space>
@@ -35,6 +44,9 @@ const StatHeader: FC = () => {
         <Tooltip title="拷贝链接">
           <Button icon={<CopyOutlined />} onClick={copy}></Button>
         </Tooltip>
+        <Popover content={QRCodeElem}>
+          <Button icon={<QrcodeOutlined />}></Button>
+        </Popover>
       </Space>
     )
   }
