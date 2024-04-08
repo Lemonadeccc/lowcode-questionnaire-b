@@ -5,10 +5,12 @@ import useLoadQuestionData from "../../../hooks/useLoadQuestionData"
 import EditCanvas from "./EditCanvas"
 import { useDispatch } from "react-redux"
 import { changeSelectedId } from "../../../store/componentsReducer"
+import { useTitle } from "ahooks"
 import EditHeader from "./EditHeader"
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import styles from "./index.module.scss"
+import useGetPageInfo from "../../../hooks/useGetPageInfo"
 
 const Edit: FC = () => {
   // const { id = "" } = useParams()
@@ -19,6 +21,9 @@ const Edit: FC = () => {
   function clearSelectedId() {
     dispatch(changeSelectedId(""))
   }
+
+  const { title } = useGetPageInfo()
+  useTitle(`问卷编辑-${title}`)
 
   return (
     <div className={styles.container}>
