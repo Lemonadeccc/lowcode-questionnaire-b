@@ -2,6 +2,7 @@
 
 import Component from "./Component"
 import { QuestionRadioDefaultProps } from "./interface"
+import StatComponent from "./StatComponent"
 import PropComponent from "./PropComponent"
 
 export * from "./interface"
@@ -12,4 +13,5 @@ export default {
   Component,
   PropComponent,
   defaultProps: QuestionRadioDefaultProps,
+  StatComponent,
 }
