@@ -30,6 +30,7 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.12.4",
     "redux-undo": "^1.1.0",
+    "source-map-explorer": "^2.5.3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -41,7 +42,8 @@
     "format": "npm-run-all --parallel format:*",
     "format:prettier": "prettier --write \"src/**/*.+(js|ts|jsx|tsx)\"",
     "format:eslint": "eslint --fix \"src/**/*.+(js|ts|jsx|tsx)\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [
