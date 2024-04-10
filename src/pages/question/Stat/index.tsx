@@ -6,6 +6,8 @@ import useLoadQuestionData from "../../../hooks/useLoadQuestionData"
 import useGetPageInfo from "../../../hooks/useGetPageInfo"
 import ComponentList from "./ComponentList"
 import StatHeader from "./StatHeader"
+import ChartStat from "./ChartStat"
+import PageStat from "./PageStat"
 import styles from "./index.module.scss"
 
 const Stat: FC = () => {
@@ -50,8 +52,19 @@ const Stat: FC = () => {
             setSelectedComponentType={setSelectedComponentType}
           />
         </div>
-        <div className={styles.main}>中间</div>
-        <div className={styles.right}>右侧</div>
+        <div className={styles.main}>
+          <PageStat
+            selectedComponentId={selectedComponentId}
+            setSelectedComponentId={setSelectedComponentId}
+            setSelectedComponentType={setSelectedComponentType}
+          />
+        </div>
+        <div className={styles.right}>
+          <ChartStat
+            selectedComponentId={selectedComponentId}
+            selectedComponentType={selectedComponentType}
+          />
+        </div>
       </>
     )
   }

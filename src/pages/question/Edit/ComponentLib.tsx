@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useCallback } from "react"
 import { componentConfGroup, ComponentConfType } from "../../../components/QuestionComponents"
 import { Typography } from "antd"
 import { addComponent } from "../../../store/componentsReducer"
@@ -13,7 +13,7 @@ const Lib: FC = () => {
     const { title, type, Component, defaultProps } = c
     const dispatch = useDispatch()
 
-    function handleClick() {
+    const handleClick = useCallback(() => {
       dispatch(
         addComponent({
           fe_id: nanoid(),
@@ -22,7 +22,18 @@ const Lib: FC = () => {
           props: defaultProps,
         })
       )
-    }
+    }, [])
+
+    // function handleClick() {
+    //   dispatch(
+    //     addComponent({
+    //       fe_id: nanoid(),
+    //       title,
+    //       type,
+    //       props: defaultProps,
+    //     })
+    //   )
+    // }
 
     return (
       <div key={type} className={styles.wrapper} onClick={handleClick}>
